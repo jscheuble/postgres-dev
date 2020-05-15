@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable('user', tbl => {
+    return knex.schema.createTable('users', tbl => {
         tbl.increments();
         tbl.string('username').notNullable().unique();
         tbl.string('password').notNullable();
@@ -12,12 +12,12 @@ exports.up = function (knex) {
             tbl.integer('user_id')
                 .unsigned()
                 .notNullable()
-                .references('user.id')
+                .references('users.id')
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
         })
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTableIfExists('post').dropTableIfExists('user');
+    return knex.schema.dropTableIfExists('post').dropTableIfExists('users');
 };
